@@ -17,7 +17,10 @@ public class UserWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter{
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         super.addInterceptors(registry);
-        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**")
+        /**
+         * 表示除了/login不拦截,别的都拦截
+         */
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/api/**")
                 .excludePathPatterns("/login");
     }
 }

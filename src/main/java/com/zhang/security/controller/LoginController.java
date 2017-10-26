@@ -13,8 +13,9 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
-    public User login(String username, String password, HttpSession httpSession){
+    public User login(Integer id, String password,String username, HttpSession httpSession){
         User user=new User();
+        user.setId(id);
         user.setUsername(username);
         user.setPassword(password);
         httpSession.setAttribute(Constants.USER,user);

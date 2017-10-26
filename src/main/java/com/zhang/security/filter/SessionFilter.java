@@ -3,6 +3,7 @@ package com.zhang.security.filter;
 import com.zhang.security.auth.MyAuthentication;
 import com.zhang.security.bean.User;
 import com.zhang.security.utils.Constants;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import javax.servlet.*;
@@ -26,15 +27,19 @@ public class SessionFilter implements Filter{
                          FilterChain filterChain) throws IOException, ServletException {
         try {
             final HttpServletRequest req = (HttpServletRequest) servletRequest;
-            final MyAuthentication myAuthentication = new MyAuthentication();
+            //final MyAuthentication myAuthentication = new MyAuthentication();
+            final MyAuthentication userAuth=new MyAuthentication();
+            SecurityContextHolder.getContext().setAuthentication(userAuth);
             HttpSession httpSession = req.getSession();
             User user = (User) httpSession.getAttribute(Constants.USER);
             //将session中的认证信息注入到Authentication中去
             System.out.println(httpSession.getId());
-            myAuthentication.inject(user);
-            httpSession.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
-                    SecurityContextHolder.getContext()
-            );
+            userAuth.inject(user);
+            httpSession.setAttribute(
+                    HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
+                    SecurityContextHolder.getContext());
+            System.out.println(httpSession.getId());
+            System.out.println(httpSession.toString());
         }finally {
             filterChain.doFilter(servletRequest,servletResponse);
         }

@@ -1,6 +1,7 @@
 package com.zhang.security.auth;
 
 import com.zhang.security.bean.User;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -9,7 +10,9 @@ import java.util.Collection;
 /**
  * 用来存储身份认证信息的
  */
-public class MyAuthentication implements Authentication{
+public class MyAuthentication implements Authentication {
+
+    public MyAuthentication(){}
 
     private User user;
 
@@ -17,6 +20,7 @@ public class MyAuthentication implements Authentication{
      * 获取到用户的权限
      * @return
      */
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
@@ -28,6 +32,7 @@ public class MyAuthentication implements Authentication{
      * 2. 否则会则返回为null
      * @return
      */
+    @Override
     public Object getCredentials() {
         if (!isAuthenticated()){
             return null;
@@ -39,7 +44,7 @@ public class MyAuthentication implements Authentication{
      * 将用户对象注入进来
      * @param user
      */
-    public void inject(User user){
+    public void inject(final User user){
         this.user=user;
     }
 
@@ -47,6 +52,7 @@ public class MyAuthentication implements Authentication{
      * 相当于返回的用户信息
      * @return
      */
+    @Override
     public Object getDetails() {
         return user;
     }
@@ -55,19 +61,24 @@ public class MyAuthentication implements Authentication{
      * 获取到用户凭证
      * @return
      */
+    @Override
     public Object getPrincipal() {
-        return null;
+        if (!isAuthenticated()){
+            return null;
+        }
+        return user.getId();
     }
 
     /**
      * 判断是否认证过
      * @return
      */
+    @Override
     public boolean isAuthenticated() {
-        return user!=null;
+        return user != null;
     }
-
-    public void setAuthenticated(boolean b) throws IllegalArgumentException {
+    @Override
+    public void setAuthenticated(boolean isAuthenticate) throws IllegalArgumentException {
 
     }
 
@@ -75,6 +86,7 @@ public class MyAuthentication implements Authentication{
      * 获取到用户名称
      * @return
      */
+    @Override
     public String getName() {
         if (!isAuthenticated()) {
             return null;
