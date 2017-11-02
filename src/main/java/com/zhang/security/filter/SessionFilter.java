@@ -3,7 +3,6 @@ package com.zhang.security.filter;
 import com.zhang.security.auth.MyAuthentication;
 import com.zhang.security.bean.User;
 import com.zhang.security.utils.Constants;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import javax.servlet.*;
