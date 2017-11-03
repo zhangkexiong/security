@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public ResultType selectUserByToken(String token) {
-        ResultType resultType =new ResultType();
+        ResultType resultType = new ResultType();
         String userInfo = redisTemplate.opsForValue().get(token);
         System.out.println(userInfo);
         if (userInfo != null) {
@@ -88,6 +88,19 @@ public class UserServiceImpl implements UserService{
             return resultType;
         }
         resultType.setMessage("用户信息过期已经被销毁!!");
+        return resultType;
+    }
+
+    @Override
+    public ResultType removeUserByToken(String token) {
+        ResultType resultType = new ResultType();
+        resultType.setStatus("200");
+        //1. 判断token是否为空
+        if (token != null){
+        redisTemplate.delete(token);
+        resultType.setSuccess(true);
+        resultType.setMessage("移除key成功");
+        }
         return resultType;
     }
 

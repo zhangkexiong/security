@@ -11,4 +11,6 @@ public interface UserService {
     ResultType register(User user);
 
     ResultType selectUserByToken(String token);
+
+    ResultType removeUserByToken(String token);
 }
