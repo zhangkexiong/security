@@ -59,11 +59,17 @@ public class LoginController {
         return userService.selectUserByToken(token);
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/myLogout")
+    @ResponseBody
     public ResultType logout(HttpServletRequest request){
         //1. 获取到cookie中的token,将redis中的数据删除
         String token = CookieUtils.getCookieValue(request,TOKEN_KEY);
         return userService.removeUserByToken(token);
+    }
+
+    @GetMapping("toLogout")
+    public String toLogout(){
+        return "logout";
     }
 
     @GetMapping("/login")

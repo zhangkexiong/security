@@ -13,9 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * filter:表示对所有请求的预处理
@@ -68,8 +65,6 @@ public class SessionFilter implements Filter{
         if (user == null && userInfo != null){
             //执行本地的登录操作,将用户的信息保存到redis中
             response.sendRedirect("/login");
-            return;
-            //filterChain.doFilter(servletRequest,servletResponse);
         }
         else if (user != null && userInfo != null){
             //直接跳过
@@ -77,16 +72,12 @@ public class SessionFilter implements Filter{
         }
         else if (user != null && userInfo == null){
             //跳转到登出页面,执行退出登录(说明redis中的数据已经删除)
-            response.sendRedirect("/logout");
-            return;
-            //filterChain.doFilter(servletRequest,servletResponse);
+            response.sendRedirect("/toLogout");
         }
         else {
             //跳转到登录页面,执行登录操作,同时进行登录成功的跳转页面
             response.sendRedirect(request.getContextPath()+ "/login");
-            //filterChain.doFilter(servletRequest,servletResponse);
         }
-        //filterChain.doFilter(servletRequest,servletResponse);
     } }
 
     /*@Override

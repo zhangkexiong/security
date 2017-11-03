@@ -24,7 +24,7 @@ public class WebConfiguration {
         List<String> urlPatterns = new ArrayList<>();
         urlPatterns.add("/*");
         registrationBean.setUrlPatterns(urlPatterns);
-        registrationBean.addInitParameter("excludeUri","/login");
+        registrationBean.addInitParameter("excludeUri","/login,/myLogout,/toLogout");
         return registrationBean;
     }
 
