@@ -39,8 +39,8 @@ public class UserServiceImpl implements UserService{
         User user = userDao.selectByUsername(username);
         if (user != null) {
             String pass = user.getPassword();
-            String md5Pass = DigestUtils.md5DigestAsHex(password.getBytes());
-            if (md5Pass.equals(pass)) {
+            //String md5Pass = DigestUtils.md5DigestAsHex(password.getBytes());
+            if (password.equals(pass)) {
                 String token = USER_SESSION+UUID.randomUUID().toString();
                 String userJson = JSON.toJSONString(user);
                 //说明用户信息验证成功,将用户的信息保存到redis中并且设置过期时间

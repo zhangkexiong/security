@@ -1,3 +1,4 @@
+/*
 package com.zhang.security.interceptor;
 
 import com.zhang.security.bean.User;
@@ -9,9 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+*/
 /**
  * 设置登录时拦截
- */
+ *//*
+
 public class LoginInterceptor implements HandlerInterceptor{
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
@@ -33,3 +36,4 @@ public class LoginInterceptor implements HandlerInterceptor{
 
     }
 }
+*/

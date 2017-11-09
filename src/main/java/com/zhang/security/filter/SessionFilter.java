@@ -1,3 +1,4 @@
+/*
 package com.zhang.security.filter;
 
 import com.zhang.security.bean.User;
@@ -14,10 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+*/
 /**
  * filter:表示对所有请求的预处理
  * 一般可以在这里做缓存
- */
+ *//*
+
 public class SessionFilter implements Filter{
 
     @Value("${TOKEN_KEY}")
@@ -27,17 +30,20 @@ public class SessionFilter implements Filter{
     private UserService userService;
 
     private String []excludedUris;
-    /**
+    */
+/**
      * 此方法中可以配置取消的拦截资源
      * @param filterConfig
      * @throws ServletException
-     */
+     *//*
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         excludedUris = filterConfig.getInitParameter("excludeUri").split(",");
     }
 
-    /**
+    */
+/**
      * 1.判断用户是否登录
      * 2.获取用户的信息
      * 在每次访问资源之前都根据传过来的token查询用户信息
@@ -46,7 +52,8 @@ public class SessionFilter implements Filter{
      * @param filterChain
      * @throws IOException
      * @throws ServletException
-     */
+     *//*
+
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
@@ -54,9 +61,11 @@ public class SessionFilter implements Filter{
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(Constants.USER);
         String userInfo = getUserInfo(request);
-        /**
+        */
+/**
          * 判断用户是否登录和userInfo值之间的关系
-         */
+         *//*
+
         //如果是不需要过滤的资源,直接放行
         if (isExcludedUri(request.getRequestURI())){
             filterChain.doFilter(request,response);
@@ -80,7 +89,8 @@ public class SessionFilter implements Filter{
         }
     } }
 
-    /*@Override
+    */
+/*@Override
     public void doFilter(ServletRequest servletRequest,
                          ServletResponse servletResponse,
                          FilterChain filterChain) throws IOException, ServletException {
@@ -102,7 +112,8 @@ public class SessionFilter implements Filter{
         }finally {
             filterChain.doFilter(servletRequest,servletResponse);
         }
-    }*/
+    }*//*
+
 
 
     @Override
@@ -118,11 +129,13 @@ public class SessionFilter implements Filter{
         return null;
     }
 
-    /**
+    */
+/**
      * 判断是否是不用过滤掉的资源
      * @param uri
      * @return
-     */
+     *//*
+
     private boolean isExcludedUri(String uri) {
         if (excludedUris == null || excludedUris.length <= 0) {
             return false;
@@ -137,3 +150,4 @@ public class SessionFilter implements Filter{
     }
 
 }
+*/

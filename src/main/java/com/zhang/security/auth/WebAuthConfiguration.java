@@ -1,3 +1,4 @@
+/*
 package com.zhang.security.auth;
 
 import com.zhang.security.filter.SessionFilter;
@@ -16,9 +17,11 @@ import org.springframework.security.web.context.SecurityContextPersistenceFilter
 public class WebAuthConfiguration extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        /**
+        */
+/**
          * 表示在加载filter之前加载SessionFilter
-         */
+         *//*
+
         httpSecurity.addFilterBefore(getSessionFilter(), SecurityContextPersistenceFilter.class)
                 //关闭掉csrf认证
                 .csrf().disable();
@@ -29,3 +32,4 @@ public class WebAuthConfiguration extends WebSecurityConfigurerAdapter{
     }
 
 }
+*/
