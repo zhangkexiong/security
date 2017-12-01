@@ -8,3 +8,8 @@ spring boot 与security的完美融合
 4. 认证成功,跳转到资源页面
 5. 重复步骤1
 6. 认证成功,获取到用户信息,返回资源页面
+
+
+#security的处理流程
+1. 用户登录,会被AuthenticationProcessingFilter拦截,调用AuthenticationManager的实现，而且AuthenticationManager会调用ProviderManager来获取用户验证信息.
+2. 访问资源,在访问url的时候,会通过AbstractSecurityInterceptor拦截器拦截,在这个拦截器中会调用FilterInvocationSecurityMetadataSource的方法来获取url所需要的权限,然后调用AccessDecisionManager授权管理器,这个授权管理器会调用spring的全局缓存SecurityContextHolder获取用户的权限信息,还会获取被拦截的url和被拦截url的所需要的权限信息,然后根据所配置的策略.
